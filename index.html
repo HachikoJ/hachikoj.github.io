@@ -6,16 +6,18 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 <style>
   :root {
     --bg: #020617;
-    --panel: rgba(10, 16, 30, 0.9);
+    --panel: rgba(8, 14, 28, 0.92);
+    --panel-2: rgba(15, 23, 42, 0.9);
     --line: rgba(148, 163, 184, 0.16);
     --line-strong: rgba(96, 165, 250, 0.34);
-    --text: #eef6ff;
+    --text: #f4f8ff;
     --muted: #9fb0c7;
-    --muted-2: #d7e3f4;
+    --muted-2: #d8e5f7;
     --blue: #2563eb;
     --purple: #7c3aed;
     --cyan: #22d3ee;
     --green: #34d399;
+    --amber: #fbbf24;
     --shadow: 0 24px 60px rgba(2, 6, 23, 0.42);
     --shadow-hover: 0 28px 80px rgba(37, 99, 235, 0.18);
   }
@@ -24,11 +26,12 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   body {
     background:
-      radial-gradient(circle at 12% 12%, rgba(37,99,235,.16), transparent 22%),
+      radial-gradient(circle at 12% 12%, rgba(37,99,235,.18), transparent 22%),
       radial-gradient(circle at 88% 10%, rgba(124,58,237,.18), transparent 24%),
-      linear-gradient(180deg, #020617 0%, #07111f 34%, #0b1324 66%, #020617 100%);
+      linear-gradient(180deg, #020617 0%, #06101d 32%, #0a1426 66%, #020617 100%);
     color: var(--text);
     font-size: 18px;
+    overflow-x: hidden;
   }
 
   body:before {
@@ -40,8 +43,17 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
       linear-gradient(rgba(148,163,184,.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(148,163,184,.05) 1px, transparent 1px);
     background-size: 34px 34px;
-    mask-image: radial-gradient(circle at center, black 28%, transparent 84%);
+    mask-image: radial-gradient(circle at center, black 30%, transparent 84%);
     opacity: .22;
+  }
+
+  body:after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(34,211,238,.02), transparent 30%, transparent 70%, rgba(124,58,237,.03));
+    mix-blend-mode: screen;
   }
 
   .site-shell {
@@ -58,12 +70,13 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(148,163,184,.08);
+    position: relative;
   }
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.02fr 0.98fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1.04fr;
+    gap: 36px;
     align-items: center;
   }
 
@@ -77,32 +90,33 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     background: rgba(15,23,42,.46);
     color: #c4d7ff;
     font-size: 13px;
-    letter-spacing: .14em;
+    letter-spacing: .16em;
     text-transform: uppercase;
     font-weight: 800;
     margin-bottom: 22px;
   }
 
   .hero-name {
-    font-size: clamp(5.4rem, 12vw, 9rem);
-    line-height: .88;
+    font-size: clamp(5.8rem, 13vw, 9.8rem);
+    line-height: .84;
     font-weight: 900;
-    letter-spacing: -0.09em;
+    letter-spacing: -0.1em;
     margin: 0 0 14px;
     color: #fff;
-    text-shadow: 0 0 38px rgba(96,165,250,.18);
+    text-transform: uppercase;
+    text-shadow: 0 0 42px rgba(96,165,250,.22);
   }
 
   .hero-title {
-    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
     color: #eef6ff;
     font-weight: 800;
     margin-bottom: 18px;
-    letter-spacing: -.03em;
+    letter-spacing: -.04em;
   }
 
   .hero-copy p {
-    max-width: 640px;
+    max-width: 620px;
     color: var(--muted-2);
     font-size: 1.08rem;
     line-height: 1.8;
@@ -111,24 +125,26 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .chips,
   .hero-actions,
-  .project-tags {
+  .project-tags,
+  .tech-strip {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
   }
 
-  .chips { margin-top: 24px; }
+  .chips { margin-top: 22px; }
   .hero-actions { margin-top: 30px; }
 
   .chip,
-  .project-tag {
+  .project-tag,
+  .tech-node {
     padding: 10px 16px;
     border-radius: 999px;
     background: rgba(255,255,255,.04);
     border: 1px solid rgba(148,163,184,.14);
     color: #e2ecfb;
-    font-size: .96rem;
-    font-weight: 600;
+    font-size: .94rem;
+    font-weight: 700;
   }
 
   .btn-hero {
@@ -159,25 +175,29 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .btn-hero:hover { transform: translateY(-3px); text-decoration: none; color: white; }
 
-  .card,
+  .panel,
   .metric-card,
   .project-card,
   .support-card,
-  .terminal-card {
+  .terminal-card,
+  .console-card {
     position: relative;
-    background: linear-gradient(180deg, rgba(10,16,30,.92), rgba(4,8,20,.92));
+    background: linear-gradient(180deg, rgba(10,16,30,.94), rgba(4,8,20,.94));
     border: 1px solid var(--line);
     border-radius: 26px;
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
-  .card:before,
+  .panel:before,
   .metric-card:before,
   .project-card:before,
   .support-card:before,
-  .terminal-card:before {
+  .terminal-card:before,
+  .console-card:before {
     content: "";
     position: absolute;
     inset: -35%;
@@ -187,21 +207,22 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     pointer-events: none;
   }
 
-  .card:hover,
+  .panel:hover,
   .metric-card:hover,
   .project-card:hover,
   .support-card:hover,
-  .terminal-card:hover {
-    transform: translateY(-6px);
+  .terminal-card:hover,
+  .console-card:hover {
     border-color: var(--line-strong);
     box-shadow: var(--shadow-hover);
   }
 
-  .card:hover:before,
+  .panel:hover:before,
   .metric-card:hover:before,
   .project-card:hover:before,
   .support-card:hover:before,
-  .terminal-card:hover:before {
+  .terminal-card:hover:before,
+  .console-card:hover:before {
     opacity: 1;
   }
 
@@ -210,7 +231,8 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     gap: 18px;
   }
 
-  .terminal-head {
+  .terminal-head,
+  .console-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -225,41 +247,77 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .dot:nth-child(2) { background: #fbbf24; }
   .dot:nth-child(3) { background: #34d399; }
 
-  .terminal-label {
+  .terminal-label,
+  .console-label {
     color: var(--muted);
     font-size: .96rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .terminal-body,
+  .console-body {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
   }
 
   .terminal-body {
-    padding: 20px;
     font-family: 'SFMono-Regular', Consolas, monospace;
     font-size: 1rem;
     color: #d7e3f4;
-    position: relative;
-    z-index: 1;
   }
 
   .terminal-line { margin-bottom: 12px; }
   .terminal-line span { color: var(--cyan); }
   .terminal-line strong { color: #fff; }
 
+  .console-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .console-node {
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(148,163,184,.1);
+  }
+
+  .console-node .node-k {
+    color: var(--muted);
+    font-size: .84rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: 8px;
+  }
+
+  .console-node .node-v {
+    color: #fff;
+    font-size: 1.34rem;
+    font-weight: 800;
+    letter-spacing: -.03em;
+  }
+
   .hero-lower {
     display: grid;
-    grid-template-columns: 1.08fr .92fr;
+    grid-template-columns: 1.06fr .94fr;
     gap: 18px;
   }
 
   .metric-card,
-  .card,
+  .panel,
   .support-card,
   .project-card {
     padding: 26px;
   }
 
   .metric-card h3,
-  .card h3,
+  .panel h3,
   .project-card h3,
-  .support-card h3 {
+  .support-card h3,
+  .console-card h3 {
     margin: 0 0 12px;
     font-size: 1.24rem;
     color: #fff;
@@ -293,9 +351,10 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .section-head p,
   .metric-card p,
-  .card p,
+  .panel p,
   .project-card p,
-  .support-card p {
+  .support-card p,
+  .console-card p {
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.8;
@@ -357,8 +416,8 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .signal-list i { color: var(--green); margin-top: 5px; }
 
   .skill-icon {
-    width: 52px;
-    height: 52px;
+    width: 54px;
+    height: 54px;
     border-radius: 18px;
     display: inline-flex;
     align-items: center;
@@ -366,11 +425,11 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     background: linear-gradient(135deg, rgba(37,99,235,.18), rgba(124,58,237,.18));
     border: 1px solid rgba(99,102,241,.22);
     margin-bottom: 16px;
-    font-size: 1.4rem;
+    font-size: 1.46rem;
   }
 
   .project-card {
-    min-height: 280px;
+    min-height: 300px;
   }
 
   .project-title-row {
@@ -460,14 +519,15 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     .grid-3,
     .projects-grid,
     .support-grid,
-    .metric-grid {
+    .metric-grid,
+    .console-grid {
       grid-template-columns: 1fr;
     }
     .hero-actions {
       flex-direction: column;
     }
     .btn-hero { width: 100%; }
-    .hero-name { font-size: 5.2rem; }
+    .hero-name { font-size: 5.4rem; }
   }
 </style>
 
@@ -477,10 +537,10 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
       <div class="hero-grid">
         <div class="hero-copy">
           <div class="eyebrow"><i class="fa fa-terminal"></i> Wilson · Builder · Vibe Coding</div>
-          <h1 class="hero-name">Wilson</h1>
+          <h1 class="hero-name">WILSON</h1>
           <div class="hero-title">Tech Geek / Product Builder / AI 实战派</div>
-          <p>不是写模板博客的人，更像在持续构建产品、系统和工具的人。</p>
-          <p>喜欢深色、技术感、强气质的页面，也喜欢把想法迅速做成真的东西。</p>
+          <p>我不想做一个普通的博客首页，我更想做一个像个人控制台一样的主页。</p>
+          <p>它应该有技术感、有系统感，也能直接体现我在做什么、能做什么、正在往哪里走。</p>
           <div class="hero-actions">
             <a class="btn-hero btn-primary-hero" href="https://github.com/HachikoJ"><i class="fa fa-github"></i> GitHub</a>
             <a class="btn-hero btn-secondary-hero" href="#projects"><i class="fa fa-cubes"></i> 查看项目</a>
@@ -489,7 +549,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
             <span class="chip">AI Builder</span>
             <span class="chip">Vibe Coding</span>
             <span class="chip">Automation</span>
-            <span class="chip">Product Sense</span>
+            <span class="chip">System-minded</span>
           </div>
         </div>
 
@@ -506,6 +566,34 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
               <div class="terminal-line"><span>$</span> status <strong>shipping</strong></div>
             </div>
           </div>
+
+          <div class="console-card">
+            <div class="console-head">
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="console-label">builder.console</div>
+            </div>
+            <div class="console-body">
+              <div class="console-grid">
+                <div class="console-node">
+                  <div class="node-k">Current Build</div>
+                  <div class="node-v">匿证</div>
+                </div>
+                <div class="console-node">
+                  <div class="node-k">Primary Mode</div>
+                  <div class="node-v">Ship Fast</div>
+                </div>
+                <div class="console-node">
+                  <div class="node-k">Design Bias</div>
+                  <div class="node-v">Geek UI</div>
+                </div>
+                <div class="console-node">
+                  <div class="node-k">Core Stack</div>
+                  <div class="node-v">AI + Web</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="hero-lower">
             <div class="metric-card">
               <h3>能力画像</h3>
@@ -540,32 +628,32 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
         <p>你更像产品型极客，不像传统博客作者。</p>
       </div>
       <div class="grid-3">
-        <div class="card">
+        <div class="panel">
           <div class="skill-icon">⚡</div>
           <h3>快速产品化</h3>
           <p>会迅速把概念做成能展示、能跑、能上线的产品原型或正式项目。</p>
         </div>
-        <div class="card">
+        <div class="panel">
           <div class="skill-icon">🧠</div>
           <h3>AI 驱动构建</h3>
           <p>会真正把 AI 融入工作流、构建流程和产品能力，而不是停留在概念层。</p>
         </div>
-        <div class="card">
+        <div class="panel">
           <div class="skill-icon">🎯</div>
           <h3>结果导向</h3>
           <p>更在意东西是不是已经成型、是不是像产品，而不是过程说了多少。</p>
         </div>
-        <div class="card">
+        <div class="panel">
           <div class="skill-icon">🛠️</div>
           <h3>全栈执行</h3>
           <p>从页面、文案、交互到部署、代理、进程管理，都能一路打通。</p>
         </div>
-        <div class="card">
+        <div class="panel">
           <div class="skill-icon">🎨</div>
           <h3>视觉偏好明确</h3>
           <p>更偏爱深色、技术风、层次感和一点炫酷，而不是普通模板味。</p>
         </div>
-        <div class="card">
+        <div class="panel">
           <div class="skill-icon">🚀</div>
           <h3>持续迭代</h3>
           <p>会反复推敲首页、文案、布局、动效和整体气质，直到更像成品。</p>
@@ -581,7 +669,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
           <div class="section-kicker">Selected Projects</div>
           <h2>代表项目</h2>
         </div>
-        <p>真正能代表你风格的，是这些做出来的东西。</p>
+        <p>真正能代表你风格的，是这些做出来的系统。</p>
       </div>
       <div class="projects-grid">
         <div class="project-card">
@@ -642,7 +730,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
           <div class="section-kicker">Links & Presence</div>
           <h2>链接与存在感</h2>
         </div>
-        <p>个人主页应该像产品首页，不该像借来的博客模板。</p>
+        <p>个人主页应该像控制台，而不是老式博客。</p>
       </div>
       <div class="support-grid">
         <div class="support-card avatar-card">
@@ -666,10 +754,10 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   <section class="section">
     <div class="container">
-      <div class="project-card" style="text-align:center; padding: 48px 28px;">
+      <div class="project-card" style="text-align:center; padding: 50px 30px;">
         <div class="section-kicker" style="margin-bottom:10px;">Next Move</div>
-        <h2 style="margin:0 0 12px; font-size: clamp(2.1rem, 4vw, 2.8rem); color:#fff; font-weight:900; letter-spacing:-.04em;">持续构建，比持续表达更重要</h2>
-        <p style="max-width: 700px; margin: 0 auto 24px; color: var(--muted-2); font-size:1.02rem; line-height:1.8;">如果你也对 AI 产品、自动化系统、极客风个人站或独立开发感兴趣，欢迎来看看我最近在做什么。</p>
+        <h2 style="margin:0 0 12px; font-size: clamp(2.2rem, 4vw, 3rem); color:#fff; font-weight:900; letter-spacing:-.05em;">持续构建，比持续表达更重要</h2>
+        <p style="max-width: 720px; margin: 0 auto 24px; color: var(--muted-2); font-size:1.04rem; line-height:1.8;">如果你也对 AI 产品、自动化系统、极客风个人站或独立开发感兴趣，欢迎来看看我最近在做什么。</p>
         <div class="hero-actions" style="justify-content:center; margin-top:0;">
           <a class="btn-hero btn-primary-hero" href="https://github.com/HachikoJ">进入 GitHub</a>
           <a class="btn-hero btn-secondary-hero" href="https://hachikoj.github.io/anonyproof/">查看匿证</a>
@@ -686,18 +774,24 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 </div>
 
 <script>
-  const glowCards = document.querySelectorAll('.card, .metric-card, .project-card, .support-card, .terminal-card');
+  const glowCards = document.querySelectorAll('.panel, .metric-card, .project-card, .support-card, .terminal-card, .console-card');
+
   glowCards.forEach((card) => {
     card.addEventListener('mousemove', (event) => {
       const rect = card.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 100;
       const y = ((event.clientY - rect.top) / rect.height) * 100;
+      const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -6;
+      const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
       card.style.setProperty('--mx', `${x}%`);
       card.style.setProperty('--my', `${y}%`);
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
     });
+
     card.addEventListener('mouseleave', () => {
       card.style.setProperty('--mx', '50%');
       card.style.setProperty('--my', '50%');
+      card.style.transform = '';
     });
   });
 </script>
