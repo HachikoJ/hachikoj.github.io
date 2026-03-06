@@ -6,32 +6,35 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 <style>
   :root {
     --bg: #020617;
-    --panel: rgba(8, 14, 28, 0.92);
-    --panel-2: rgba(15, 23, 42, 0.9);
+    --panel: rgba(8, 14, 28, 0.94);
+    --panel-2: rgba(15, 23, 42, 0.92);
     --line: rgba(148, 163, 184, 0.16);
-    --line-strong: rgba(96, 165, 250, 0.34);
-    --text: #f4f8ff;
-    --muted: #9fb0c7;
-    --muted-2: #d8e5f7;
+    --line-strong: rgba(96, 165, 250, 0.3);
+    --text: #f5f8ff;
+    --muted: #b8c7d8;
+    --muted-2: #edf4ff;
     --blue: #2563eb;
     --purple: #7c3aed;
     --cyan: #22d3ee;
     --green: #34d399;
-    --amber: #fbbf24;
     --shadow: 0 24px 60px rgba(2, 6, 23, 0.42);
-    --shadow-hover: 0 28px 80px rgba(37, 99, 235, 0.18);
+    --shadow-hover: 0 28px 80px rgba(37, 99, 235, 0.14);
   }
 
   html { scroll-behavior: smooth; }
 
   body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     background:
-      radial-gradient(circle at 12% 12%, rgba(37,99,235,.18), transparent 22%),
-      radial-gradient(circle at 88% 10%, rgba(124,58,237,.18), transparent 24%),
+      radial-gradient(circle at 12% 12%, rgba(37,99,235,.14), transparent 22%),
+      radial-gradient(circle at 88% 10%, rgba(124,58,237,.14), transparent 24%),
       linear-gradient(180deg, #020617 0%, #06101d 32%, #0a1426 66%, #020617 100%);
     color: var(--text);
     font-size: 20px;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body:before {
@@ -40,20 +43,11 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     inset: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(rgba(148,163,184,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148,163,184,.05) 1px, transparent 1px);
+      linear-gradient(rgba(148,163,184,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.04) 1px, transparent 1px);
     background-size: 34px 34px;
     mask-image: radial-gradient(circle at center, black 30%, transparent 84%);
-    opacity: .22;
-  }
-
-  body:after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(34,211,238,.02), transparent 30%, transparent 70%, rgba(124,58,237,.03));
-    mix-blend-mode: screen;
+    opacity: .16;
   }
 
   .site-shell {
@@ -75,8 +69,8 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1.04fr;
-    gap: 36px;
+    grid-template-columns: 1fr 1.02fr;
+    gap: 40px;
     align-items: center;
   }
 
@@ -86,47 +80,45 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     gap: 10px;
     padding: 12px 18px;
     border-radius: 999px;
-    border: 1px solid rgba(96,165,250,.18);
-    background: rgba(15,23,42,.46);
-    color: #c4d7ff;
+    border: 1px solid rgba(96,165,250,.14);
+    background: rgba(15,23,42,.54);
+    color: #d7e6ff;
     font-size: 14px;
-    letter-spacing: .16em;
+    letter-spacing: .12em;
     text-transform: uppercase;
     font-weight: 800;
     margin-bottom: 22px;
   }
 
   .hero-name {
-    font-size: clamp(5.8rem, 13vw, 9.8rem);
-    line-height: .84;
+    font-size: clamp(5.6rem, 12vw, 9.2rem);
+    line-height: .9;
     font-weight: 900;
-    letter-spacing: -0.1em;
+    letter-spacing: -0.05em;
     margin: 0 0 14px;
     color: #fff;
     text-transform: uppercase;
-    text-shadow: 0 0 42px rgba(96,165,250,.22);
   }
 
   .hero-title {
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
-    color: #eef6ff;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #ffffff;
     font-weight: 800;
     margin-bottom: 18px;
-    letter-spacing: -.04em;
+    letter-spacing: -.02em;
   }
 
   .hero-copy p {
-    max-width: 620px;
+    max-width: 640px;
     color: var(--muted-2);
-    font-size: 1.18rem
-    line-height: 1.8;
+    font-size: 1.16rem;
+    line-height: 1.72;
     margin-bottom: 12px;
   }
 
   .chips,
   .hero-actions,
-  .project-tags,
-  .tech-strip {
+  .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -136,14 +128,13 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .hero-actions { margin-top: 30px; }
 
   .chip,
-  .project-tag,
-  .tech-node {
+  .project-tag {
     padding: 10px 16px;
     border-radius: 999px;
-    background: rgba(255,255,255,.04);
+    background: rgba(255,255,255,.05);
     border: 1px solid rgba(148,163,184,.14);
-    color: #e2ecfb;
-    font-size: 1.02rem
+    color: #f2f7ff;
+    font-size: 1rem;
     font-weight: 700;
   }
 
@@ -156,7 +147,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     border-radius: 16px;
     text-decoration: none;
     font-weight: 800;
-    font-size: 1.08rem
+    font-size: 1.04rem;
     transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
     border: 1px solid transparent;
   }
@@ -164,16 +155,16 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .btn-primary-hero {
     color: white;
     background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
-    box-shadow: 0 18px 42px rgba(37,99,235,.28);
+    box-shadow: 0 18px 42px rgba(37,99,235,.24);
   }
 
   .btn-secondary-hero {
-    color: #eef6ff;
+    color: #f4f8ff;
     background: rgba(255,255,255,.04);
     border-color: rgba(148,163,184,.16);
   }
 
-  .btn-hero:hover { transform: translateY(-3px); text-decoration: none; color: white; }
+  .btn-hero:hover { transform: translateY(-2px); text-decoration: none; color: white; }
 
   .panel,
   .metric-card,
@@ -182,12 +173,12 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .terminal-card,
   .console-card {
     position: relative;
-    background: linear-gradient(180deg, rgba(10,16,30,.94), rgba(4,8,20,.94));
+    background: linear-gradient(180deg, rgba(12,18,32,.96), rgba(7,12,24,.96));
     border: 1px solid var(--line);
-    border-radius: 26px;
+    border-radius: 24px;
     box-shadow: var(--shadow);
     overflow: hidden;
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     transform-style: preserve-3d;
     will-change: transform;
   }
@@ -201,9 +192,9 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     content: "";
     position: absolute;
     inset: -35%;
-    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,.24), transparent 18%);
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,.16), transparent 18%);
     opacity: 0;
-    transition: opacity .22s ease;
+    transition: opacity .18s ease;
     pointer-events: none;
   }
 
@@ -249,8 +240,8 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .terminal-label,
   .console-label {
-    color: var(--muted);
-    font-size: 1.04rem
+    color: #cbd8ea;
+    font-size: 1rem;
     letter-spacing: .08em;
     text-transform: uppercase;
   }
@@ -264,8 +255,9 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .terminal-body {
     font-family: 'SFMono-Regular', Consolas, monospace;
-    font-size: 1.08rem
-    color: #d7e3f4;
+    font-size: 1.06rem;
+    color: #e4eefc;
+    line-height: 1.7;
   }
 
   .terminal-line { margin-bottom: 12px; }
@@ -286,18 +278,18 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   .console-node .node-k {
-    color: var(--muted);
-    font-size: .84rem;
+    color: #b8c7d8;
+    font-size: .88rem;
     text-transform: uppercase;
-    letter-spacing: .1em;
+    letter-spacing: .08em;
     margin-bottom: 8px;
   }
 
   .console-node .node-v {
     color: #fff;
-    font-size: 1.34rem;
+    font-size: 1.42rem;
     font-weight: 800;
-    letter-spacing: -.03em;
+    letter-spacing: -.02em;
   }
 
   .hero-lower {
@@ -319,7 +311,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .support-card h3,
   .console-card h3 {
     margin: 0 0 12px;
-    font-size: 1.34rem
+    font-size: 1.36rem;
     color: #fff;
     font-weight: 800;
   }
@@ -333,17 +325,17 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   .section-kicker {
-    color: #7dd3fc;
-    font-size: .96rem
-    letter-spacing: .16em;
+    color: #8fd8ff;
+    font-size: .96rem;
+    letter-spacing: .12em;
     text-transform: uppercase;
     font-weight: 800;
     margin-bottom: 8px;
   }
 
   .section-head h2 {
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    letter-spacing: -0.05em;
+    font-size: clamp(2.3rem, 4vw, 3.2rem);
+    letter-spacing: -0.03em;
     margin: 0;
     color: #fff;
     font-weight: 900;
@@ -355,9 +347,9 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .project-card p,
   .support-card p,
   .console-card p {
-    color: var(--muted);
-    font-size: 1.08rem
-    line-height: 1.8;
+    color: var(--muted-2);
+    font-size: 1.08rem;
+    line-height: 1.72;
   }
 
   .grid-3,
@@ -387,14 +379,14 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .metric strong {
     display: block;
-    font-size: 1.72rem
+    font-size: 1.68rem;
     color: #fff;
     margin-bottom: 4px;
   }
 
   .metric span {
-    color: var(--muted);
-    font-size: .92rem;
+    color: var(--muted-2);
+    font-size: 1rem;
   }
 
   .signal-list {
@@ -409,8 +401,8 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     display: flex;
     gap: 12px;
     color: var(--muted-2);
-    font-size: 1.08rem
-    line-height: 1.7;
+    font-size: 1.08rem;
+    line-height: 1.72;
   }
 
   .signal-list i { color: var(--green); margin-top: 5px; }
@@ -441,9 +433,9 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   .project-title-row span {
-    color: #93c5fd;
-    font-size: .92rem
-    letter-spacing: .12em;
+    color: #b7dcff;
+    font-size: .94rem;
+    letter-spacing: .08em;
     text-transform: uppercase;
     font-weight: 800;
   }
@@ -456,10 +448,10 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
 
   .project-links a,
   .support-link {
-    color: #bfdbfe;
+    color: #dcecff;
     text-decoration: none;
     font-weight: 800;
-    font-size: .98rem;
+    font-size: 1rem;
   }
 
   .project-links a:hover,
@@ -486,10 +478,10 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   .site-footer {
     padding: 32px 0 56px;
     text-align: center;
-    color: #64748b;
+    color: #94a3b8;
     border-top: 1px solid rgba(148,163,184,.08);
     margin-top: 24px;
-    font-size: 1.08rem
+    font-size: 1.08rem;
   }
 
   @media (max-width: 1100px) {
@@ -508,7 +500,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   @media (max-width: 768px) {
-    body { font-size: 18px }
+    body { font-size: 18px; }
     .hero { min-height: auto; }
     .section,
     .hero { padding: 30px 0; }
@@ -527,7 +519,7 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
       flex-direction: column;
     }
     .btn-hero { width: 100%; }
-    .hero-name { font-size: 5.4rem; }
+    .hero-name { font-size: 5.2rem; }
   }
 </style>
 
@@ -756,8 +748,8 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     <div class="container">
       <div class="project-card" style="text-align:center; padding: 50px 30px;">
         <div class="section-kicker" style="margin-bottom:10px;">Next Move</div>
-        <h2 style="margin:0 0 12px; font-size: clamp(2.2rem, 4vw, 3rem); color:#fff; font-weight:900; letter-spacing:-.05em;">持续构建，比持续表达更重要</h2>
-        <p style="max-width: 720px; margin: 0 auto 24px; color: var(--muted-2); font-size:1.04rem; line-height:1.8;">如果你也对 AI 产品、自动化系统、极客风个人站或独立开发感兴趣，欢迎来看看我最近在做什么。</p>
+        <h2 style="margin:0 0 12px; font-size: clamp(2.2rem, 4vw, 3rem); color:#fff; font-weight:900; letter-spacing:-.03em;">持续构建，比持续表达更重要</h2>
+        <p style="max-width: 720px; margin: 0 auto 24px; color: var(--muted-2); font-size:1.08rem; line-height:1.72;">如果你也对 AI 产品、自动化系统、极客风个人站或独立开发感兴趣，欢迎来看看我最近在做什么。</p>
         <div class="hero-actions" style="justify-content:center; margin-top:0;">
           <a class="btn-hero btn-primary-hero" href="https://github.com/HachikoJ">进入 GitHub</a>
           <a class="btn-hero btn-secondary-hero" href="https://hachikoj.github.io/anonyproof/">查看匿证</a>
@@ -781,11 +773,11 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
       const rect = card.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 100;
       const y = ((event.clientY - rect.top) / rect.height) * 100;
-      const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -6;
-      const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+      const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -4;
+      const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 5;
       card.style.setProperty('--mx', `${x}%`);
       card.style.setProperty('--my', `${y}%`);
-      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
 
     card.addEventListener('mouseleave', () => {
