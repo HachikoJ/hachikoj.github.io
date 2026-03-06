@@ -1,46 +1,703 @@
 ---
-layout: page
-description: "「离开世界之前 一切都是过程」"
+layout: default
+description: "Wilson · 匿证作者 · Vibe Coding Builder"
 ---
 
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-        <div class="post-content-preview">
-            {% if post.lang == 'en' %}
-                {{ post.content | strip_html | truncate:300 }}
-            {% else %}
-                {{ post.content | strip_html | truncate:200 }}
-            {% endif %}
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-</div>
-<hr>
-{% endfor %}
+<style>
+  :root {
+    --bg: #020617;
+    --panel: rgba(10, 16, 30, 0.86);
+    --panel-2: rgba(15, 23, 42, 0.82);
+    --line: rgba(148, 163, 184, 0.14);
+    --line-strong: rgba(96, 165, 250, 0.32);
+    --text: #e5eefb;
+    --muted: #94a3b8;
+    --muted-2: #cbd5e1;
+    --blue: #2563eb;
+    --purple: #7c3aed;
+    --cyan: #22d3ee;
+    --green: #34d399;
+    --shadow: 0 24px 60px rgba(2, 6, 23, 0.4);
+    --shadow-hover: 0 28px 80px rgba(37, 99, 235, 0.16);
+  }
 
-<!-- Pager -->
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
+  body {
+    background:
+      radial-gradient(circle at 12% 12%, rgba(37,99,235,.16), transparent 22%),
+      radial-gradient(circle at 88% 10%, rgba(124,58,237,.18), transparent 24%),
+      linear-gradient(180deg, #020617 0%, #07111f 34%, #0b1324 66%, #020617 100%);
+    color: var(--text);
+  }
+
+  body:before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(148,163,184,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.05) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(circle at center, black 28%, transparent 84%);
+    opacity: .22;
+  }
+
+  .navbar-custom {
+    background: rgba(2, 6, 23, 0.58) !important;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .intro-header,
+  .post-container,
+  .sidebar-container,
+  .pager,
+  hr {
+    display: none !important;
+  }
+
+  .site-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section {
+    padding: 84px 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(148,163,184,.08);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.04fr 0.96fr;
+    gap: 34px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(96,165,250,.18);
+    background: rgba(15,23,42,.46);
+    color: #c4d7ff;
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .hero-name {
+    font-size: clamp(4.6rem, 10vw, 8rem);
+    line-height: .9;
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    margin: 0 0 12px;
+    color: #fff;
+    text-shadow: 0 0 34px rgba(96,165,250,.16);
+  }
+
+  .hero-title {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    color: #dbe7ff;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .hero-copy p {
+    max-width: 560px;
+    color: var(--muted-2);
+    font-size: .98rem;
+    margin-bottom: 10px;
+  }
+
+  .chips,
+  .hero-actions,
+  .stack-list,
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .chips { margin-top: 20px; }
+  .hero-actions { margin-top: 26px; }
+
+  .chip,
+  .stack-pill,
+  .project-tag {
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(148,163,184,.14);
+    color: #d7e3f4;
+    font-size: .88rem;
+  }
+
+  .btn-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary-hero {
+    color: white;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    box-shadow: 0 18px 42px rgba(37,99,235,.28);
+  }
+
+  .btn-secondary-hero {
+    color: #e2e8f0;
+    background: rgba(255,255,255,.04);
+    border-color: rgba(148,163,184,.16);
+  }
+
+  .btn-hero:hover { transform: translateY(-3px); text-decoration: none; color: white; }
+
+  .card,
+  .metric-card,
+  .project-card,
+  .support-card,
+  .terminal-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(10,16,30,.9), rgba(4,8,20,.9));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+
+  .card:before,
+  .metric-card:before,
+  .project-card:before,
+  .support-card:before,
+  .terminal-card:before {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,.24), transparent 18%);
+    opacity: 0;
+    transition: opacity .22s ease;
+    pointer-events: none;
+  }
+
+  .card:hover,
+  .metric-card:hover,
+  .project-card:hover,
+  .support-card:hover,
+  .terminal-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card:hover:before,
+  .metric-card:hover:before,
+  .project-card:hover:before,
+  .support-card:hover:before,
+  .terminal-card:hover:before {
+    opacity: 1;
+  }
+
+  .hero-side {
+    display: grid;
+    gap: 16px;
+  }
+
+  .terminal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dots { display: flex; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 999px; }
+  .dot:nth-child(1) { background: #f87171; }
+  .dot:nth-child(2) { background: #fbbf24; }
+  .dot:nth-child(3) { background: #34d399; }
+
+  .terminal-label {
+    color: var(--muted);
+    font-size: .84rem;
+  }
+
+  .terminal-body {
+    padding: 18px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: .9rem;
+    color: #d7e3f4;
+    position: relative;
+    z-index: 1;
+  }
+
+  .terminal-line { margin-bottom: 10px; }
+  .terminal-line span { color: var(--cyan); }
+  .terminal-line strong { color: #fff; }
+
+  .hero-lower {
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    gap: 16px;
+  }
+
+  .metric-card,
+  .card,
+  .support-card,
+  .project-card {
+    padding: 22px;
+  }
+
+  .metric-card h3,
+  .card h3,
+  .project-card h3,
+  .support-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.02rem;
+    color: #fff;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .section-kicker {
+    color: #7dd3fc;
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: #fff;
+  }
+
+  .section-head p,
+  .metric-card p,
+  .card p,
+  .project-card p,
+  .support-card p,
+  .project-meta,
+  .support-note {
+    color: var(--muted);
+    font-size: .92rem;
+  }
+
+  .grid-3,
+  .projects-grid,
+  .support-grid,
+  .metric-grid {
+    display: grid;
+    gap: 18px;
+  }
+
+  .grid-3,
+  .projects-grid,
+  .support-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metric {
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(148,163,184,.1);
+  }
+
+  .metric strong {
+    display: block;
+    font-size: 1.36rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .signal-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .signal-list li {
+    display: flex;
+    gap: 12px;
+    color: var(--muted-2);
+    font-size: .9rem;
+  }
+
+  .signal-list i { color: var(--green); margin-top: 4px; }
+
+  .skill-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(37,99,235,.18), rgba(124,58,237,.18));
+    border: 1px solid rgba(99,102,241,.22);
+    margin-bottom: 14px;
+    font-size: 1.2rem;
+  }
+
+  .project-card {
+    min-height: 260px;
+  }
+
+  .project-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .project-title-row span {
+    color: #93c5fd;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .project-links a,
+  .support-link {
+    color: #bfdbfe;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .project-links a:hover,
+  .support-link:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  .avatar-card {
+    text-align: center;
+    padding: 24px;
+  }
+
+  .avatar-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 28px;
+    object-fit: cover;
+    border: 1px solid rgba(148,163,184,.12);
+    box-shadow: 0 18px 34px rgba(2,6,23,.3);
+    margin-bottom: 16px;
+  }
+
+  .site-footer {
+    padding: 28px 0 52px;
+    text-align: center;
+    color: #64748b;
+    border-top: 1px solid rgba(148,163,184,.08);
+    margin-top: 24px;
+  }
+
+  @media (max-width: 1100px) {
+    .grid-3,
+    .projects-grid,
+    .support-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 980px) {
+    .hero-grid,
+    .hero-lower {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero { min-height: auto; }
+    .section,
+    .hero { padding: 28px 0; }
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .grid-3,
+    .projects-grid,
+    .support-grid,
+    .metric-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-actions {
+      flex-direction: column;
+    }
+    .btn-hero { width: 100%; }
+    .hero-name { font-size: 4.8rem; }
+  }
+</style>
+
+<div class="site-shell">
+  <section class="hero section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Wilson · Builder · Vibe Coding</div>
+          <h1 class="hero-name">Wilson</h1>
+          <div class="hero-title">AI 助手、产品构建者、极客型独立开发者</div>
+          <p>偏爱技术感、克制但不无聊的界面。喜欢把想法快速做成真实可用的产品，再持续打磨成型。</p>
+          <p>最近在做匿名反馈平台、训练工具、自动化方案，以及更像“产品”而不是“Demo”的个人项目。</p>
+          <div class="hero-actions">
+            <a class="btn-hero btn-primary-hero" href="https://github.com/HachikoJ"><i class="fab fa-github"></i> GitHub</a>
+            <a class="btn-hero btn-secondary-hero" href="#projects"><i class="fa-solid fa-layer-group"></i> 查看项目</a>
+          </div>
+          <div class="chips">
+            <span class="chip">Vibe Coding</span>
+            <span class="chip">AI Product</span>
+            <span class="chip">Automation</span>
+            <span class="chip">Full Stack</span>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="terminal-card">
+            <div class="terminal-head">
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="terminal-label">profile.system</div>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line"><span>$</span> name <strong>Wilson</strong></div>
+              <div class="terminal-line"><span>$</span> style <strong>tech / geek / product-first</strong></div>
+              <div class="terminal-line"><span>$</span> focus <strong>AI tools / systems / UX</strong></div>
+              <div class="terminal-line"><span>$</span> mode <strong>ship fast, polish later</strong></div>
+            </div>
+          </div>
+          <div class="hero-lower">
+            <div class="metric-card">
+              <h3>能力画像</h3>
+              <div class="metric-grid">
+                <div class="metric"><strong>AI</strong><span>工具落地</span></div>
+                <div class="metric"><strong>UX</strong><span>产品感打磨</span></div>
+                <div class="metric"><strong>Code</strong><span>全栈实现</span></div>
+                <div class="metric"><strong>Ship</strong><span>快速上线</span></div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <h3>工作方式</h3>
+              <ul class="signal-list">
+                <li><i class="fa-solid fa-circle-check"></i><span>喜欢直接、高效、不废话</span></li>
+                <li><i class="fa-solid fa-circle-check"></i><span>先做出可用版本，再持续进化</span></li>
+                <li><i class="fa-solid fa-circle-check"></i><span>更在意成品气质，不满足于拼凑</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Style & Skillset</div>
+          <h2>风格与能力</h2>
+        </div>
+        <p>从我们最近的对话和你的网站项目来看，你不是传统博客型作者，更像产品驱动的技术极客。</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="skill-icon">⚡</div>
+          <h3>快速产品化</h3>
+          <p>不是停留在想法，而是倾向于快速把概念做成能跑、能展示、能部署的成品。</p>
+        </div>
+        <div class="card">
+          <div class="skill-icon">🧠</div>
+          <h3>AI 驱动构建</h3>
+          <p>会把 AI 当作真正的生产力，而不是噱头，重点在于把它用进工作流和产品能力里。</p>
+        </div>
+        <div class="card">
+          <div class="skill-icon">🎯</div>
+          <h3>结果导向</h3>
+          <p>对“有没有做出来”“看起来是否像产品”“是否能上线”这类结果比过程描述更敏感。</p>
+        </div>
+        <div class="card">
+          <div class="skill-icon">🛠️</div>
+          <h3>全栈执行</h3>
+          <p>从页面、交互、文案，到部署、代理、服务进程、GitHub Pages，都愿意一路打通。</p>
+        </div>
+        <div class="card">
+          <div class="skill-icon">🎨</div>
+          <h3>强视觉审美</h3>
+          <p>不喜欢普通模板感，偏爱更技术、更酷、更有层次感的界面，尤其讨厌“像写给开发者看的文案”。</p>
+        </div>
+        <div class="card">
+          <div class="skill-icon">🚀</div>
+          <h3>持续迭代</h3>
+          <p>不是做完就停，而是会反复推敲：首页、文案、布局、交互、动效都会一轮轮往上提。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Selected Projects</div>
+          <h2>代表项目</h2>
+        </div>
+        <p>最近更能代表你风格的，不是“写了什么文章”，而是“做出了什么东西”。</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-title-row">
+            <h3>匿证</h3>
+            <span>Anonymous Product</span>
+          </div>
+          <p>一个完全匿名、端到端加密、防偷看的反馈平台。不是纯概念页，而是从产品、前端、后端、部署到文档都做完整的项目。</p>
+          <div class="project-tags">
+            <span class="project-tag">Next.js</span>
+            <span class="project-tag">Express</span>
+            <span class="project-tag">SQLite</span>
+            <span class="project-tag">PM2</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/HachikoJ/anonyproof">GitHub</a>
+            <a href="https://hachikoj.github.io/anonyproof/">Live Page</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-title-row">
+            <h3>训练 / 学习工具</h3>
+            <span>Training Systems</span>
+          </div>
+          <p>围绕学习、训练、知识整理与效率提升搭建一套能持续使用的工具体系，而不是一次性页面。</p>
+          <div class="project-tags">
+            <span class="project-tag">Workflow</span>
+            <span class="project-tag">Knowledge</span>
+            <span class="project-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/HachikoJ?tab=repositories">Explore</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-title-row">
+            <h3>AI + 自动化</h3>
+            <span>Agentic Build</span>
+          </div>
+          <p>把 AI、自动化、脚本能力和真实需求结合起来，目标是形成可运行、可复用、可持续迭代的系统。</p>
+          <div class="project-tags">
+            <span class="project-tag">AI</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Ops</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/HachikoJ">Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="support">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Links & Presence</div>
+          <h2>链接与存在感</h2>
+        </div>
+        <p>个人主页应该像产品首页，而不是套来的博客模板。这版就是按这个方向重做的。</p>
+      </div>
+      <div class="support-grid">
+        <div class="support-card avatar-card">
+          <img src="https://github.com/hachikoj.png" alt="Wilson Avatar" />
+          <h3>Wilson</h3>
+          <p>独立开发者 · AI Builder · 产品型极客</p>
+        </div>
+        <div class="support-card">
+          <h3>GitHub</h3>
+          <p>查看我的代码、项目、迭代过程，以及正在形成中的产品矩阵。</p>
+          <a class="support-link" href="https://github.com/HachikoJ">打开 GitHub →</a>
+        </div>
+        <div class="support-card">
+          <h3>正在构建</h3>
+          <p>更像产品的匿名反馈系统、AI 辅助工具、训练与知识型系统，以及更多技术感项目。</p>
+          <a class="support-link" href="https://github.com/HachikoJ/anonyproof">查看匿证 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="project-card" style="text-align:center; padding: 42px 24px;">
+        <div class="section-kicker" style="margin-bottom:10px;">Next Move</div>
+        <h2 style="margin:0 0 10px; font-size: clamp(1.9rem, 3vw, 2.4rem);">持续构建，比持续表达更重要</h2>
+        <p style="max-width: 640px; margin: 0 auto 22px; color: var(--muted-2);">如果你也对 AI 产品、自动化系统、极客风个人站或独立开发感兴趣，欢迎来看看我最近在做什么。</p>
+        <div class="hero-actions" style="justify-content:center; margin-top:0;">
+          <a class="btn-hero btn-primary-hero" href="https://github.com/HachikoJ">进入 GitHub</a>
+          <a class="btn-hero btn-secondary-hero" href="https://hachikoj.github.io/anonyproof/">查看匿证</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="site-footer">
+    <div class="container">
+      <p>Wilson · Tech Geek · Product Builder · Vibe Coding</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const glowCards = document.querySelectorAll('.card, .metric-card, .project-card, .support-card, .terminal-card');
+  glowCards.forEach((card) => {
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', `${x}%`);
+      card.style.setProperty('--my', `${y}%`);
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+  });
+</script>

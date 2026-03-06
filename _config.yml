@@ -1,10 +1,10 @@
 # Site settings
-title: Wilson Blog
-SEOTitle: Wilson的博客 | Hux Blog
-header-img: img/home-bg.jpg
+title: Wilson
+SEOTitle: Wilson | Tech Geek · Product Builder
+header-img: img/home-bg-geek.jpg
 email: 946106011@qq.com
-description: "这里是 @Wilson 的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员"
-keyword: "Wilson, Wilson的博客, Wilson Blog, 博客, 个人网站, 互联网, Web, AI, Vibe Coding, RPA"
+description: "Wilson 的个人主页 · AI Builder / Tech Geek / Product Builder"
+keyword: "Wilson, 匿证, HachikoJ, AI, Vibe Coding, 自动化, 独立开发, 产品, GitHub Pages"
 # url: "https://huangxuan.me" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
