@@ -108,11 +108,41 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   .hero-copy p {
-    max-width: 1040px;
+    max-width: 880px;
     color: var(--muted-2);
-    font-size: 1.38rem;
-    line-height: 1.66;
+    font-size: 1.34rem;
+    line-height: 1.62;
     margin-bottom: 12px;
+  }
+
+  .hero-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .hero-summary .summary-node {
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(148,163,184,.12);
+  }
+
+  .hero-summary .summary-k {
+    color: #8fd8ff;
+    font-size: .94rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+    font-weight: 800;
+  }
+
+  .hero-summary .summary-v {
+    color: #fff;
+    font-size: 1.18rem;
+    font-weight: 800;
+    line-height: 1.45;
   }
 
   .chips,
@@ -312,11 +342,13 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   .section-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
     align-items: end;
-    justify-content: space-between;
     gap: 24px;
     margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(148,163,184,.08);
   }
 
   .section-kicker {
@@ -416,6 +448,34 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
   }
 
   .project-card { min-height: 300px; }
+
+  .product-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .product-strip .strip-card {
+    padding: 26px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, rgba(10,18,32,.96), rgba(6,12,24,.96));
+    border: 1px solid rgba(148,163,184,.12);
+    box-shadow: var(--shadow);
+  }
+
+  .product-strip .strip-card strong {
+    display: block;
+    color: #fff;
+    font-size: 1.42rem;
+    margin-bottom: 10px;
+  }
+
+  .product-strip .strip-card p {
+    color: var(--muted-2);
+    font-size: 1.15rem;
+    line-height: 1.66;
+    margin: 0;
+  }
 
   .project-title-row {
     display: flex;
@@ -518,7 +578,9 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
     .projects-grid,
     .support-grid,
     .metric-grid,
-    .console-grid {
+    .console-grid,
+    .hero-summary,
+    .product-strip {
       grid-template-columns: 1fr;
     }
     .hero-actions { flex-direction: column; }
@@ -535,11 +597,25 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
           <div class="eyebrow"><i class="fa fa-terminal"></i> Wilson · Builder · Vibe Coding</div>
           <h1 class="hero-name">WILSON</h1>
           <div class="hero-title">Tech Geek / Product Builder / AI 实战派</div>
-          <p>独立开发者，关注 AI、自动化、产品构建与技术风格表达。</p>
-          <p>偏好把想法快速做成真实可用的系统，再持续打磨成更完整的产品。</p>
+          <p>围绕 AI、自动化与产品构建，持续把概念压缩成可运行、可上线、可验证的真实系统。</p>
+          <p>页面、产品、部署、文档和交互保持统一质感，强调成品感、结构感和交付速度。</p>
           <div class="hero-actions">
-            <a class="btn-hero btn-primary-hero" href="https://github.com/HachikoJ"><i class="fa fa-github"></i> GitHub</a>
-            <a class="btn-hero btn-secondary-hero" href="#projects"><i class="fa fa-cubes"></i> 查看项目</a>
+            <a class="btn-hero btn-primary-hero" href="#projects"><i class="fa fa-cubes"></i> 查看项目矩阵</a>
+            <a class="btn-hero btn-secondary-hero" href="https://github.com/HachikoJ"><i class="fa fa-github"></i> GitHub</a>
+          </div>
+          <div class="hero-summary">
+            <div class="summary-node">
+              <div class="summary-k">Core Focus</div>
+              <div class="summary-v">AI 产品、自动化系统、独立开发交付</div>
+            </div>
+            <div class="summary-node">
+              <div class="summary-k">Build Style</div>
+              <div class="summary-v">先打通主链路，再把产品气质推到位</div>
+            </div>
+            <div class="summary-node">
+              <div class="summary-k">Output Bias</div>
+              <div class="summary-v">更重视真实可用，而不是概念展示</div>
+            </div>
           </div>
           <div class="chips">
             <span class="chip">AI Builder</span>
@@ -613,13 +689,30 @@ description: "Wilson · 匿证作者 · Vibe Coding Builder"
       </div>
     </section>
 
+    <section class="section">
+      <div class="product-strip">
+        <div class="strip-card">
+          <strong>Build Products</strong>
+          <p>从想法、界面、交互到部署，把产品主链路快速做通。</p>
+        </div>
+        <div class="strip-card">
+          <strong>Ship Systems</strong>
+          <p>不只写页面，也处理进程、代理、发布、文档和交付闭环。</p>
+        </div>
+        <div class="strip-card">
+          <strong>Refine Experience</strong>
+          <p>持续把技术项目往更完整、更有产品感的成品方向推进。</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="skills">
       <div class="section-head">
         <div>
           <div class="section-kicker">Style & Skillset</div>
           <h2>风格与能力</h2>
         </div>
-        <p>产品感、技术感和视觉要求，会同时体现在页面与项目里。</p>
+        <p>关注产品完成度、技术执行力和最终呈现气质，而不是停留在概念层。</p>
       </div>
       <div class="grid-3">
         <div class="panel">
