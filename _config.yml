@@ -1,0 +1,24 @@
+title: Wilson
+SEOTitle: Wilson | Personal Tech Brand
+header-img: img/home-bg.jpg
+description: Wilson 的个人技术品牌主页
+keyword: "Wilson, HachikoJ, AI, 自动化, 独立开发, 产品, 匿名反馈, Skill"
+url: "https://hachikoj.github.io"
+baseurl: ""
+
+sidebar: false
+featured-tags: false
+featured-condition-size: 999
+friends: false
+about: false
+
+plugins: []
+
+exclude:
+  - less
+  - node_modules
+  - Gruntfile.js
+  - package.json
+  - package-lock.json
+  - README.zh.md
+  - LICENSE

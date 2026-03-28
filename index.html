@@ -1,0 +1,805 @@
+---
+layout: default
+description: "Wilson · 个人技术品牌主页"
+---
+
+<style>
+  :root {
+    --bg: #030712;
+    --panel: rgba(8, 14, 28, 0.9);
+    --panel-soft: rgba(8, 14, 28, 0.76);
+    --line: rgba(148, 163, 184, 0.14);
+    --line-strong: rgba(96, 165, 250, 0.24);
+    --text: #f8fbff;
+    --muted: #d6e2f3;
+    --muted-soft: #9fb1c8;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --cyan: #22d3ee;
+    --shadow: 0 28px 80px rgba(2, 6, 23, 0.38);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    color: var(--text);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background:
+      radial-gradient(circle at 14% 10%, rgba(59,130,246,.14), transparent 20%),
+      radial-gradient(circle at 84% 8%, rgba(139,92,246,.10), transparent 24%),
+      linear-gradient(180deg, #02050d 0%, #07101c 36%, #091120 68%, #030712 100%);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .12;
+    background-image:
+      linear-gradient(rgba(148,163,184,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.03) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 88%);
+  }
+
+  .shell {
+    position: relative;
+    z-index: 1;
+    width: min(1240px, calc(100vw - 72px));
+    margin: 0 auto;
+  }
+
+  .section { padding: 82px 0; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 42px 0 32px;
+  }
+
+  .hero-box {
+    width: 100%;
+    border-radius: 36px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(8,14,28,.94), rgba(5,10,20,.96));
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(148,163,184,.08);
+  }
+
+  .dots { display: flex; gap: 8px; }
+  .dot { width: 9px; height: 9px; border-radius: 999px; }
+  .dot:nth-child(1) { background: #f87171; }
+  .dot:nth-child(2) { background: #fbbf24; }
+  .dot:nth-child(3) { background: #34d399; }
+
+  .top-label {
+    color: #d8e5f7;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 420px);
+  }
+
+  .hero-main {
+    padding: 52px 46px 46px;
+    border-right: 1px solid rgba(148,163,184,.08);
+  }
+
+  .hero-side {
+    padding: 28px;
+    display: grid;
+    gap: 18px;
+    align-content: start;
+    background: linear-gradient(180deg, rgba(255,255,255,.01), rgba(255,255,255,.02));
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(96,165,250,.16);
+    background: rgba(59,130,246,.08);
+    color: #dbe9ff;
+    font-size: .98rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(5rem, 10vw, 8.2rem);
+    line-height: .88;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .hero-subtitle {
+    margin: 18px 0 18px;
+    max-width: 760px;
+    font-size: clamp(1.62rem, 2.8vw, 2.4rem);
+    line-height: 1.28;
+    color: #eef5ff;
+    font-weight: 800;
+  }
+
+  .hero-copy p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 1.22rem;
+    line-height: 1.92;
+    max-width: 760px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 24px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1.02rem;
+    font-weight: 800;
+    transition: .22s ease;
+  }
+
+  .btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+    box-shadow: 0 18px 42px rgba(37,99,235,.2);
+  }
+
+  .btn-secondary {
+    color: #edf4ff;
+    background: rgba(255,255,255,.04);
+    border-color: rgba(148,163,184,.14);
+  }
+
+  .btn:hover { transform: translateY(-2px); text-decoration: none; color: #fff; }
+
+  .hero-gridline {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .metric {
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(148,163,184,.1);
+  }
+
+  .metric .k {
+    color: #8fd8ff;
+    font-size: .96rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .metric .v {
+    color: #fff;
+    font-size: 1.14rem;
+    line-height: 1.68;
+    font-weight: 800;
+  }
+
+  .card,
+  .feature-card,
+  .project-card,
+  .link-card,
+  .closing-card {
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(8,14,28,.9), rgba(6,11,22,.94));
+    box-shadow: var(--shadow);
+  }
+
+  .console-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 0;
+  }
+
+  .console-label {
+    color: #d6e1f2;
+    font-size: .98rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+  }
+
+  .console-body { padding: 18px 20px 20px; }
+
+  .terminal-line {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 1.08rem;
+    color: #e7eefb;
+    line-height: 1.86;
+  }
+
+  .terminal-line span { color: var(--cyan); }
+  .terminal-line strong { color: #fff; font-weight: 700; }
+
+  .side-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .side-node {
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(148,163,184,.09);
+  }
+
+  .side-node .k {
+    color: #bfd0e4;
+    font-size: .94rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .side-node .v {
+    color: #fff;
+    font-size: 1.08rem;
+    line-height: 1.64;
+    font-weight: 800;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .card h3,
+  .feature-card h3,
+  .project-card h3,
+  .link-card h3,
+  .closing-card h2 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-weight: 800;
+    line-height: 1.38;
+  }
+
+  .card h3,
+  .feature-card h3,
+  .project-card h3,
+  .link-card h3 {
+    font-size: 1.32rem;
+  }
+
+  .card p,
+  .feature-card p,
+  .project-card p,
+  .link-card p,
+  .closing-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.14rem;
+    line-height: 1.88;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 30px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(148,163,184,.08);
+  }
+
+  .section-kicker {
+    color: #8fd8ff;
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .section-head h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 2.9rem);
+    line-height: 1.1;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: -.04em;
+  }
+
+  .section-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.16rem;
+    line-height: 1.88;
+  }
+
+  .arch-grid,
+  .feature-grid,
+  .projects-grid,
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .arch-card,
+  .feature-card,
+  .project-card,
+  .link-card {
+    padding: 24px;
+    transition: transform .22s ease, border-color .22s ease;
+  }
+
+  .arch-card,
+  .feature-card,
+  .project-card,
+  .link-card,
+  .closing-card {
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(8,14,28,.88), rgba(6,11,22,.94));
+    box-shadow: var(--shadow);
+  }
+
+  .arch-card:hover,
+  .feature-card:hover,
+  .project-card:hover,
+  .link-card:hover,
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--line-strong);
+  }
+
+  .arch-card strong {
+    display: block;
+    color: #fff;
+    font-size: 1.26rem;
+    margin-bottom: 8px;
+  }
+
+  .arch-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.12rem;
+    line-height: 1.88;
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(59,130,246,.18), rgba(139,92,246,.18));
+    border: 1px solid rgba(99,102,241,.2);
+    font-size: 1.24rem;
+  }
+
+  .project-card {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .project-head span {
+    color: #c7daf1;
+    font-size: .92rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(148,163,184,.1);
+    color: #edf5ff;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .project-links,
+  .link-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 22px;
+  }
+
+  .project-links a,
+  .link-actions a {
+    color: #ddecff;
+    text-decoration: none;
+    font-size: 1.08rem;
+    font-weight: 800;
+  }
+
+  .project-links a:hover,
+  .link-actions a:hover { color: #fff; text-decoration: none; }
+
+  .closing-card {
+    padding: 44px 28px;
+    text-align: center;
+  }
+
+  .closing-card h2 {
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    letter-spacing: -.04em;
+  }
+
+  .closing-card p {
+    max-width: 760px;
+    margin: 0 auto 22px;
+  }
+
+  .footer {
+    padding: 28px 0 56px;
+    text-align: center;
+    color: #8ea5bc;
+    border-top: 1px solid rgba(148,163,184,.08);
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 1180px) {
+    .shell {
+      width: min(1080px, calc(100vw - 36px));
+    }
+    .hero-grid,
+    .section-head,
+    .arch-grid,
+    .feature-grid,
+    .projects-grid,
+    .links-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-main {
+      border-right: 0;
+      border-bottom: 1px solid rgba(148,163,184,.08);
+    }
+    .hero-gridline {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .shell {
+      width: calc(100vw - 18px);
+    }
+    .section { padding: 56px 0; }
+    .hero { min-height: auto; padding-top: 18px; }
+    .hero-main { padding: 34px 22px; }
+    .hero-side { padding: 22px; }
+    .hero h1 { font-size: 3.8rem; }
+    .hero-subtitle { font-size: 1.32rem; }
+    .hero-copy p,
+    .card p,
+    .feature-card p,
+    .project-card p,
+    .link-card p,
+    .closing-card p,
+    .section-head p,
+    .arch-card p { font-size: 1rem; }
+    .hero-actions,
+    .project-links,
+    .link-actions { flex-direction: column; }
+    .btn { width: 100%; }
+    .side-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="shell">
+  <section class="hero">
+    <div class="hero-box">
+      <div class="hero-top">
+        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="top-label">Wilson · Personal Tech Brand</div>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div class="eyebrow"><i class="fa fa-user"></i> Wilson</div>
+          <h1>WILSON</h1>
+          <div class="hero-subtitle">AI 产品、自动化系统与独立开发作品的持续构建者。</div>
+          <div class="hero-copy">
+            <p>围绕 AI、自动化与产品构建，持续把想法推进成可运行、可上线、可展示的真实作品。</p>
+            <p>从需求收敛、界面构建、前后端实现，到部署、排障、文档包装和展示页，保持完整交付链路与统一成品质感。</p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="http://www.deline.top/anonyproof"><i class="fa fa-external-link"></i> 立即体验匿证</a>
+            <a class="btn btn-secondary" href="#projects"><i class="fa fa-cubes"></i> 查看代表项目</a>
+            <a class="btn btn-secondary" href="https://github.com/HachikoJ"><i class="fa fa-github"></i> GitHub 主页</a>
+          </div>
+          <div class="hero-copy" style="margin-top:18px;">
+            <p><strong>联系方式：</strong>18682408521　<strong>微信：</strong>hostrow</p>
+          </div>
+          <div class="hero-gridline">
+            <div class="metric">
+              <div class="k">当前重点</div>
+              <div class="v">匿证、Skill 产品化、个人技术品牌主页<br><a href="http://www.deline.top/anonyproof" style="color:#8fd8ff; text-decoration:none; font-weight:800;">www.deline.top/anonyproof</a></div>
+            </div>
+            <div class="metric">
+              <div class="k">主要输出</div>
+              <div class="v">产品、系统、展示页、部署闭环、项目包装</div>
+            </div>
+            <div class="metric">
+              <div class="k">工作方式</div>
+              <div class="v">直接推进、持续上线、反复打磨成品质量</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="card">
+            <div class="console-head">
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="console-label">profile</div>
+            </div>
+            <div class="console-body">
+              <div class="terminal-line"><span>$</span> name <strong>Wilson</strong></div>
+              <div class="terminal-line"><span>$</span> focus <strong>AI / 产品 / 自动化</strong></div>
+              <div class="terminal-line"><span>$</span> role <strong>独立开发者</strong></div>
+              <div class="terminal-line"><span>$</span> output <strong>真实项目与可交付作品</strong></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="console-head">
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="console-label">current build</div>
+            </div>
+            <div class="console-body">
+              <div class="side-grid">
+                <div class="side-node">
+                  <div class="k">代表产品</div>
+                  <div class="v">匿证</div>
+                </div>
+                <div class="side-node">
+                  <div class="k">仓库方向</div>
+                  <div class="v">项目化 Skill 与真实系统</div>
+                </div>
+                <div class="side-node">
+                  <div class="k">主要平台</div>
+                  <div class="v">GitHub / Web</div>
+                </div>
+                <div class="side-node">
+                  <div class="k">当前动作</div>
+                  <div class="v">持续优化项目与个人品牌展示</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>个人定位</h3>
+            <p>独立推进项目，从产品想法到上线交付，持续积累属于自己的作品矩阵与方法资产。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="structure">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Personal Structure</div>
+        <h2>个人技术品牌结构</h2>
+      </div>
+      <p>围绕“我是谁、我在做什么、我做过什么、我现在重点推进什么”来组织个人首页信息。</p>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <strong>个人身份</strong>
+        <p>Wilson，独立开发者。围绕 AI、自动化与产品构建持续推进真实项目，并逐步形成个人技术品牌主页与作品集。</p>
+      </div>
+      <div class="arch-card">
+        <strong>核心方向</strong>
+        <p>聚焦 AI 产品、自动化系统、项目化 Skill、展示页与完整交付链路，重视项目最终落地与持续迭代。</p>
+      </div>
+      <div class="arch-card">
+        <strong>作品沉淀</strong>
+        <p>通过匿证、项目总控 Skill、企业诊断与需求澄清等项目，逐步积累可展示、可复用、可持续优化的作品矩阵。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="capability">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">What I Build</div>
+        <h2>我在做什么</h2>
+      </div>
+      <p>围绕个人项目、产品能力和真实交付结果，持续构建自己的技术品牌与项目体系。</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon-box">⚡</div>
+        <h3>产品推进</h3>
+        <p>把一个想法推进成可展示、可运行、可上线的真实产品，并持续迭代页面、功能与交付质量。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon-box">🧠</div>
+        <h3>AI 能力落地</h3>
+        <p>把 AI 与实际工作流、产品能力、项目控制结合起来，形成可复用、可持续打磨的系统能力。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon-box">🛠️</div>
+        <h3>完整交付</h3>
+        <p>从页面、交互、前后端实现，到部署、排障、展示页和项目包装，尽量把整个链路打通。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Selected Projects</div>
+        <h2>代表项目</h2>
+      </div>
+      <p>当前个人主页优先展示已经形成清晰成果、具备代表性的项目与 Skill。</p>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-head">
+          <h3>匿证</h3>
+          <span>AnonyProof</span>
+        </div>
+        <p>完全匿名、端到端加密、防偷看的反馈平台。是目前最完整的产品案例，包含前端、后端、部署、文档和展示页。</p>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">PM2</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HachikoJ/anonyproof">GitHub</a>
+          <a href="https://hachikoj.github.io/anonyproof/">展示页</a>
+          <a href="http://www.deline.top/anonyproof">在线访问</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-head">
+          <h3>Project From Idea to Product</h3>
+          <span>Skill</span>
+        </div>
+        <p>把模糊软件想法推进成可开发、可纠偏、可上线、可交付成果的项目总控 Skill，沉淀项目推进方法与交付逻辑。</p>
+        <div class="tags">
+          <span class="tag">Agent Skill</span>
+          <span class="tag">项目控制</span>
+          <span class="tag">交付闭环</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HachikoJ/project-from-idea-to-product">GitHub</a>
+          <a href="https://hachikoj.github.io/project-from-idea-to-product/">展示页</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-head">
+          <h3>企业诊断 / 需求澄清</h3>
+          <span>Skills</span>
+        </div>
+        <p>围绕组织问题诊断、利益相关方映射、需求澄清与可行性判断，逐步形成一组面向真实问题的咨询型 Skill。</p>
+        <div class="tags">
+          <span class="tag">企业诊断</span>
+          <span class="tag">需求澄清</span>
+          <span class="tag">咨询 Skill</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HachikoJ/enterprise-diagnostic-consultant">企业诊断</a>
+          <a href="https://github.com/HachikoJ/demand-clarity-coach">需求澄清</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="links">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Links</div>
+        <h2>入口与链接</h2>
+      </div>
+      <p>个人主页重点服务于项目展示、作品访问与个人品牌沉淀。</p>
+    </div>
+
+    <div class="links-grid">
+      <div class="link-card">
+        <h3>GitHub</h3>
+        <p>查看所有仓库、项目迭代轨迹，以及逐步成型中的作品矩阵与 Skill 体系。</p>
+        <div class="link-actions">
+          <a href="https://github.com/HachikoJ">打开 GitHub →</a>
+        </div>
+      </div>
+      <div class="link-card">
+        <h3>当前重点作品</h3>
+        <p>匿证是目前最完整的产品化案例，也是个人技术品牌展示的核心入口之一。</p>
+        <div class="link-actions">
+          <a href="https://github.com/HachikoJ/anonyproof">查看仓库 →</a>
+          <a href="https://hachikoj.github.io/anonyproof/">查看展示页 →</a>
+        </div>
+      </div>
+      <div class="link-card">
+        <h3>个人主页目标</h3>
+        <p>围绕 Wilson 本人、代表项目、当前方向和可访问入口，持续形成更完整的个人技术品牌首页。</p>
+        <div class="link-actions">
+          <a href="#projects">查看项目 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="closing-card">
+      <div class="section-kicker" style="margin-bottom:10px;">Wilson</div>
+      <h2>持续构建，持续上线，持续沉淀自己的作品。</h2>
+      <p>围绕 AI 产品、自动化系统、项目化 Skill 与完整交付链路，继续把个人技术品牌主页做成真正能代表自己的入口。</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:0;">
+        <a class="btn btn-primary" href="https://github.com/HachikoJ">进入 GitHub</a>
+        <a class="btn btn-secondary" href="https://hachikoj.github.io/anonyproof/">查看匿证</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Wilson · Personal Tech Brand</div>
+</div>

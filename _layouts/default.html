@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="keywords" content="{{ site.keyword }}">
+  <meta name="theme-color" content="#020617">
+  <meta property="og:title" content="{{ page.title | default: site.SEOTitle | default: site.title }}">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:image" content="{{ site.sidebar-avatar }}">
+  <meta property="og:url" content="{{ page.url | default: '/' }}">
+  <meta property="og:site_name" content="{{ site.SEOTitle | default: site.title }}">
+  <title>{{ page.title | default: site.SEOTitle | default: site.title }}</title>
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="canonical" href="{{ page.url | default: '/' }}">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
+  <style>
+    html, body { margin: 0; padding: 0; }
+    body { min-height: 100vh; }
+    a { text-decoration: none; }
+  </style>
+</head>
+<body>
+  {{ content }}
+</body>
+</html>
